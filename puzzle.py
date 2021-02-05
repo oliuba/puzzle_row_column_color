@@ -50,6 +50,44 @@ def column_valid(board: list) -> bool:
     return row_valid(columns)
 
 
+def color_valid(board: list) -> bool:
+    """
+    Returns True if the board is ready in colors (each color has unrepeatable numbers).
+    The board is painted in edges 5X5, starting from the left bottom edge
+    and making the whole board together.
+    >>> board = [\
+    "**** ****",\
+    "***1 ****",\
+    "**  3****",\
+    "* 4 1****",\
+    "     9 5 ",\
+    " 6  83  *",\
+    "3   1  **",\
+    "  8  2***",\
+    "  2  ****"]
+    >>> color_valid(board)
+    True
+    """
+    colors_number = len(board) - 4
+    colors = ['' for _ in range(colors_number)]
+    for ind, row in enumerate(board):
+        if ind + 1 < colors_number:
+            row_colors = ind + 1
+            for i in range(row_colors):
+                colors[i] += row[-(colors_number + i)]
+        else:
+            if ind + 1 == colors_number:
+                row_colors = ind + 1
+            else:
+                row_colors -= 1
+            for i in range(row_colors):
+                if i + 1 == row_colors:
+                    colors[-(i + 1)] += row[i: (i + colors_number)]
+                else:
+                    colors[-(i + 1)] += row[i]
+    return row_valid(colors)
+
+
 if __name__ == "__main__":
     from doctest import testmod
     testmod()
