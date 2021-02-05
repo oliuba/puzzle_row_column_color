@@ -29,6 +29,27 @@ def row_valid(board: list) -> bool:
             return False
     return True
 
+
+def column_valid(board: list) -> bool:
+    """
+    Returns True if the board is ready in columns (each column has unrepeatable numbers).
+    >>> board = ["**** **",\
+    "***1 **",\
+    "**  3**",\
+    "* 4 1 9",\
+    "     8 ",\
+    " 61  35",\
+    "3  8 7 "]
+    >>> column_valid(board)
+    True
+    """
+    columns = ['' for _ in range(len(board))]
+    for ind, _ in enumerate(board):
+        for row in board:
+            columns[ind] += row[ind]
+    return row_valid(columns)
+
+
 if __name__ == "__main__":
     from doctest import testmod
     testmod()
