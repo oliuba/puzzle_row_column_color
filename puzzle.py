@@ -88,6 +88,20 @@ def color_valid(board: list) -> bool:
     return row_valid(colors)
 
 
-if __name__ == "__main__":
-    from doctest import testmod
-    testmod()
+def validate_board(board: list) -> bool:
+    """
+    Returns True if the board is valid for the game.
+    >>> board = [\
+    "**** ****",\
+    "***1 ****",\
+    "**  3****",\
+    "* 4 2****",\
+    "     9 5 ",\
+    " 6  83  *",\
+    "3   1  **",\
+    "  8  2***",\
+    "  2  ****"]
+    >>> validate_board(board)
+    True
+    """
+    return row_valid(board) and column_valid(board) and color_valid(board)
